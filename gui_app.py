@@ -49,7 +49,6 @@ class App(ct.CTk):
             "祕笈(綠)": ct.BooleanVar(),
             "祕笈(橘)": ct.BooleanVar(),
             "創世": ct.BooleanVar(),
-            "武公": ct.BooleanVar(),
             "天上": ct.BooleanVar(),
             "挑戰者": ct.BooleanVar(),
             "一般服": ct.BooleanVar(),
@@ -62,13 +61,16 @@ class App(ct.CTk):
         self.remark_frame = ct.CTkFrame(self)
         ct.CTkLabel(self.remark_frame, text="規範:").grid(row=0, column=0, sticky="w", padx=6, pady=6)
         self.spec_var = ct.StringVar()
-        ct.CTkEntry(self.remark_frame, textvariable=self.spec_var, width=120, placeholder_text="數字").grid(row=0, column=1, padx=6, pady=6, sticky="w")
+        ct.CTkEntry(self.remark_frame, textvariable=self.spec_var, width=60, placeholder_text="數字").grid(row=0, column=1, padx=6, pady=6, sticky="w")
         ct.CTkLabel(self.remark_frame, text="永續:").grid(row=0, column=2, sticky="w", padx=6, pady=6)
         self.sustain_var = ct.StringVar()
-        ct.CTkEntry(self.remark_frame, textvariable=self.sustain_var, width=120, placeholder_text="數字").grid(row=0, column=3, padx=6, pady=6, sticky="w")
-        ct.CTkLabel(self.remark_frame, text="備註:").grid(row=0, column=4, sticky="w", padx=6, pady=6)
+        ct.CTkEntry(self.remark_frame, textvariable=self.sustain_var, width=60, placeholder_text="數字").grid(row=0, column=3, padx=6, pady=6, sticky="w")
+        ct.CTkLabel(self.remark_frame, text="靈魂武器:").grid(row=0, column=4, sticky="w", padx=6, pady=6)
+        self.soul_var = ct.StringVar()
+        ct.CTkEntry(self.remark_frame, textvariable=self.soul_var, width=60, placeholder_text="輸入").grid(row=0, column=5, padx=6, pady=6, sticky="w")
+        ct.CTkLabel(self.remark_frame, text="備註:").grid(row=0, column=6, sticky="w", padx=6, pady=6)
         self.note_var = ct.StringVar()
-        ct.CTkEntry(self.remark_frame, textvariable=self.note_var, width=320, placeholder_text="一行備註").grid(row=0, column=5, padx=6, pady=6, sticky="w")
+        ct.CTkEntry(self.remark_frame, textvariable=self.note_var, width=320, placeholder_text="一行備註").grid(row=0, column=7, padx=6, pady=6, sticky="w")
 
         self.upload_frame = ct.CTkFrame(self)
         self.upload_frame.grid_columnconfigure(0, weight=1)
@@ -211,6 +213,7 @@ class App(ct.CTk):
         self.note_var.set("")
         self.spec_var.set("")
         self.sustain_var.set("")
+        self.soul_var.set("")
         self.current_record = None
         self.entry_widgets = {}
         for w in self.fields_frame.winfo_children():
@@ -242,6 +245,7 @@ class App(ct.CTk):
         categories = {label: bool(var.get()) for label, var in self.category_vars.items()}
         spec_value = self.spec_var.get().strip()
         sustain_value = self.sustain_var.get().strip()
+        soul_value = self.soul_var.get().strip()
         note = self.note_var.get().strip()
 
         gui_data = {
@@ -259,12 +263,12 @@ class App(ct.CTk):
             "祕笈(綠)": categories.get("祕笈(綠)", False),
             "祕笈(橘)": categories.get("祕笈(橘)", False),
             "創世": categories.get("創世", False),
-            "武公": categories.get("武公", False),
             "天上": categories.get("天上", False),
             "挑戰者": categories.get("挑戰者", False),
             "一般服": categories.get("一般服", False),
             "規範": spec_value,
             "永續": sustain_value,
+            "靈魂武器": soul_value,
             "note": note,
         }
 

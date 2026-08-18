@@ -4,7 +4,7 @@ from typing import Dict, List, Optional
 import pandas as pd
 import xlwings as xw
 
-TARGET_SHEET = "挑戰者S3"
+TARGET_SHEET = "挑戰者S3 - 靈魂武器"
 
 # 將 GUI 內的核心欄位對應到 Excel 裡的六轉位置
 CORE_COLUMN_MAP = {
@@ -28,7 +28,7 @@ DEFAULT_COLUMN_MAP = {
     "祕笈(綠)": "祕笈(紅/綠/橘)",
     "祕笈(橘)": "祕笈(紅/綠/橘)",
     "創世": "創世",
-    "武公": "武公",
+    "靈魂武器": "靈魂武器",
     "天上": "天上",
     "挑戰者": "挑戰者",
     "一般服": "一般服",
@@ -127,7 +127,7 @@ def build_excel_row(gui_data: Dict[str, object], column_map: Optional[Dict[str, 
 
     # 確保其餘勾選欄位以 True/False 寫入 Excel（使用 Excel 的核取方塊連結儲存格）
     checkbox_keys = [
-        "創世", "武公", "天上", "挑戰者", "一般服",
+        "創世", "天上", "挑戰者", "一般服",
     ]
     for gui_key in checkbox_keys:
         excel_key = column_map.get(gui_key) if column_map else DEFAULT_COLUMN_MAP.get(gui_key)
