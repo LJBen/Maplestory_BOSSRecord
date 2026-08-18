@@ -1,0 +1,157 @@
+#修改流程
+輸入名稱->給所有需要的資料->二次確認與更改+輸入通關時間
+
+以下是上述所要的資料
+
+API_KEY="test_16c00444df3cd677fcb60dde233803328d270c30e10d8bb8b4cd19e143fb81eaefe8d04e6d233bd35cf2fabdeb93fb0d"
+
+角色OCID=https://open.api.nexon.com/maplestorytw/v1/id?character_name= "name"
+response={'ocid': 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'}
+
+角色等級=https://open.api.nexon.com/maplestorytw/v1/character/basic?ocid= "ocid"
+response={
+  "character_class": "幻影俠盜",
+  "character_level": 280,
+}
+
+角色戰鬥力=https://open.api.nexon.com/maplestorytw/v1/character/stat?ocid= "ocid"
+response={
+  "date": null,
+  "character_class": "幻影俠盜",
+  "final_stat": [
+    {
+      "stat_name": "戰鬥力",
+      "stat_value": "99945496"
+    },
+  ],
+  "remain_ap": 0
+}
+
+Hexa矩陣等級='https://open.api.nexon.com/maplestorytw/v1/character/hexamatrix?ocid= "ocid"
+response={
+  "date": null,
+  "character_hexa_core_equipment": [
+    {
+      "hexa_core_name": "命運詠嘆調",
+      "hexa_core_level": 1,
+      "hexa_core_type": "技能核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "命運詠嘆調"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "月光小夜曲",
+      "hexa_core_level": 0,
+      "hexa_core_type": "技能核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "月光小夜曲"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "卡牌風暴VI",
+      "hexa_core_level": 1,
+      "hexa_core_type": "精通核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "卡牌風暴VI"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "連犽突進VI",
+      "hexa_core_level": 1,
+      "hexa_core_type": "精通核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "連犽突進VI"
+        },
+        {
+          "hexa_skill_id": "命運洗牌"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "死神卡牌VI",
+      "hexa_core_level": 1,
+      "hexa_core_type": "精通核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "死神卡牌VI"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "玫瑰四重曲VI/死亡卡牌",
+      "hexa_core_level": 1,
+      "hexa_core_type": "精通核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "玫瑰四重曲VI"
+        },
+        {
+          "hexa_skill_id": "死亡卡牌"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "命運鬼牌",
+      "hexa_core_level": 1,
+      "hexa_core_type": "強化核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "強化命運鬼牌"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "黑傑克",
+      "hexa_core_level": 1,
+      "hexa_core_type": "強化核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "強化黑傑克"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "幻影標記",
+      "hexa_core_level": 0,
+      "hexa_core_type": "強化核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "強化幻影標記"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "間隙破壞",
+      "hexa_core_level": 0,
+      "hexa_core_type": "強化核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "強化間隙破壞"
+        }
+      ]
+    },
+    {
+      "hexa_core_name": "靈魂雅努斯",
+      "hexa_core_level": 30,
+      "hexa_core_type": "共用核心",
+      "linked_skill": [
+        {
+          "hexa_skill_id": "靈魂雅努斯"
+        },
+        {
+          "hexa_skill_id": "靈魂雅努斯：清晨"
+        },
+        {
+          "hexa_skill_id": "靈魂雅努斯：黃昏"
+        }
+      ]
+    }
+  ]
+}

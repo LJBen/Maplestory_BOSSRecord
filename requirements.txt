@@ -1,0 +1,5 @@
+customtkinter
+pandas
+openpyxl
+pyodbc
+requests
