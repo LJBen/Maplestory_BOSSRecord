@@ -3,6 +3,7 @@ import customtkinter as ct
 from tkinter import filedialog, messagebox
 from api_client import get_character_full_data
 from excel_writer import append_to_challenger_sheet
+from get_character_specific_info import get_character_specific_info
 
 
 class App(ct.CTk):
@@ -95,18 +96,60 @@ class App(ct.CTk):
         if not name:
             messagebox.showwarning("缺少名稱", "請輸入角色名稱。")
             return
-        if len(name) > 10:
-            messagebox.showwarning("過長", "名稱超過10字，已截斷。")
-            name = name[:10]
+        if len(name) > 20:
+            messagebox.showwarning("過長", "名稱超過20字，已截斷。")
+            name = name[:20]
             self.name_var.set(name)
         # call API and display editable fields
         try:
             data = get_character_full_data(name)
+            ocid_data = data.get("ocid_data") or {}
+            ocid = ocid_data.get("ocid")
+            if not ocid:
+                raise ValueError("無法取得 OCID，請確認角色名稱是否正確。")
+            specific_info = get_character_specific_info(ocid)
         except Exception as e:
             messagebox.showerror("API 錯誤", str(e))
             return
 
+        item_equipment = specific_info.get("item_equipment", [])
+        data["item_equipment"] = item_equipment
+        restraint_ring = next(
+            (item for item in item_equipment if item.get("item_name") == "規範戒指"),
+            {},
+        )
+        continuous_ring = next(
+            (item for item in item_equipment if item.get("item_name") == "永續戒指"),
+            {},
+        )
+        weapon = next(
+            (item for item in item_equipment if item.get("item_equipment_slot") == "武器"),
+            {},
+        )
+        heavenly_breath = next(
+            (
+                item
+                for item in item_equipment
+                if item.get("item_equipment_part") == "戒指"
+                and item.get("item_name") == "天上的氣息"
+            ),
+            {},
+        )
+
+        self.clear_time_var.set("")
+        for label in ("祕笈(紅)", "祕笈(綠)", "祕笈(橘)"):
+            self.category_vars[label].set(False)
+        self.note_var.set("")
+        self.spec_var.set(str(restraint_ring.get("special_ring_level", 0)))
+        self.sustain_var.set(str(continuous_ring.get("special_ring_level", 0)))
+        self.soul_var.set(str(weapon.get("soul_weapon_grade", 0)))
+        self.category_vars["創世"].set(bool(weapon.get("has_fate_or_genesis", False)))
+        self.category_vars["天上"].set(bool(heavenly_breath.get("equipped", False)))
+
         basic = data.get("basic", {})
+        is_challenger_world = basic.get("world_name") == "挑戰者"
+        self.category_vars["挑戰者"].set(is_challenger_world)
+        self.category_vars["一般服"].set(not is_challenger_world)
         stat = data.get("stat", {})
         hexamatrix = data.get("hexamatrix", [])
 
@@ -280,8 +323,7 @@ class App(ct.CTk):
             return
 
         self.current_record = gui_data
-        messagebox.showinfo("已上傳", "資料已寫入 Excel，表單將重置。")
-        self.reset_form()
+        messagebox.showinfo("已上傳", "資料已寫入 Excel，表單內容已保留，可繼續新增紀錄。")
 
 def run():
     ct.set_appearance_mode("System")

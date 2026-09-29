@@ -19,7 +19,7 @@ def get_character_ocid(character_name: str) -> dict:
 
 
 def get_character_basic(ocid: str) -> dict:
-    """Get basic character info including class and level."""
+    """Get basic character info including class, level, and world."""
     url = f"{BASE_URL}/character/basic"
     params = {"ocid": ocid}
     response = requests.get(url, headers=HEADERS, params=params)
@@ -28,6 +28,7 @@ def get_character_basic(ocid: str) -> dict:
     return {
         "character_class": data.get("character_class"),
         "character_level": data.get("character_level"),
+        "world_name": data.get("world_name"),
     }
 
 

@@ -3,7 +3,7 @@
 
 以下是上述所要的資料
 
-API_KEY="test_16c00444df3cd677fcb60dde233803328d270c30e10d8bb8b4cd19e143fb81eaefe8d04e6d233bd35cf2fabdeb93fb0d"
+API_KEY="test_16c0042fabdeb93fb0d"
 
 角色OCID=https://open.api.nexon.com/maplestorytw/v1/id?character_name= "name"
 response={'ocid': 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'}
@@ -154,4 +154,27 @@ response={
       ]
     }
   ]
+}
+
+裝備道具資訊 = "https://open.api.nexon.com/maplestorytw/v1/character/item-equipment?ocid= {ocid}"
+response={
+    "item_equipment": [
+      {
+            "item_name": "規範戒指",
+            "special_ring_level": X,
+      },
+      {
+            "item_name": "永續戒指",
+            "special_ring_level": X,
+      },
+      {
+        "item_name": "命運/創世閃耀之杖",
+        "item_equipment_slot": "武器",
+        "soul_weapon_grade": "7",
+      },
+      {
+        "item_equipment_part": "戒指",
+        "item_name": "天上的氣息",
+      }
+    ],
 }
