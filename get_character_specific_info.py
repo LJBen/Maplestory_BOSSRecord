@@ -31,9 +31,9 @@ def _summarize_item_equipment(
 			continue
 
 		item_name = str(item.get("item_name") or "")
-		if item_name in ("規範戒指", "Ring of Restraint"):
+		if "規範戒指" in item_name:
 			restraint_ring_level = _as_int(item.get("special_ring_level"))
-		elif item_name in ("永續戒指", "Continuous Ring"):
+		elif "永續戒指" in item_name:
 			continuous_ring_level = _as_int(item.get("special_ring_level"))
 
 		if item.get("item_equipment_slot") == "武器":

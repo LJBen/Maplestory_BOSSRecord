@@ -249,25 +249,7 @@ class App(ct.CTk):
             self.extra_shown = True
 
     def reset_form(self):
-        self.name_var.set("")
         self.clear_time_var.set("")
-        for var in self.category_vars.values():
-            var.set(False)
-        self.note_var.set("")
-        self.spec_var.set("")
-        self.sustain_var.set("")
-        self.soul_var.set("")
-        self.current_record = None
-        self.entry_widgets = {}
-        for w in self.fields_frame.winfo_children():
-            w.destroy()
-        ct.CTkLabel(self.fields_frame, text="請輸入角色名稱後按送出以查詢資料").pack(padx=8, pady=8)
-        if self.extra_shown:
-            self.extra_frame.pack_forget()
-            self.checkbox_frame.pack_forget()
-            self.remark_frame.pack_forget()
-            self.upload_frame.pack_forget()
-            self.extra_shown = False
 
     def on_upload(self):
         # collect edited values
@@ -323,11 +305,11 @@ class App(ct.CTk):
             return
 
         self.current_record = gui_data
-        messagebox.showinfo("已上傳", "資料已寫入 Excel，表單內容已保留，可繼續新增紀錄。")
+        self.reset_form()
+        messagebox.showinfo("已上傳", "資料已寫入 Excel。")
 
 def run():
     ct.set_appearance_mode("System")
     ct.set_default_color_theme("blue")
     app = App()
     app.mainloop()
-

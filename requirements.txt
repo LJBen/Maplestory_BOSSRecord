@@ -1,5 +1,4 @@
 customtkinter
 pandas
-openpyxl
-pyodbc
 requests
+xlwings
